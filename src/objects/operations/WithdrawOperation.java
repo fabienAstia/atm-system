@@ -31,6 +31,7 @@ public class WithdrawOperation {
                 count++;
                 if (count == 3) {
                     displayMessage();
+                    lockCard(card, userInfo);
                 }
             } else {
                 operation(scanner, userInfo);

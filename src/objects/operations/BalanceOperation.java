@@ -24,6 +24,7 @@ public class BalanceOperation {
                 count++;
                 if (count == 3) {
                     displayMessage();
+                    lockCard(card, userInfo);
                 }
             } else {
                 System.out.println("Le solde de votre compte est : " + userInfo.getBalance());

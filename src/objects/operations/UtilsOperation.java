@@ -33,6 +33,11 @@ public final class UtilsOperation {
         }
     }
 
+    public static void lockCard(Card card, UserInfo userInfo) {
+        card.setUnlocked(false);
+        userInfo.setIsActivated(false);
+    }
+
     public static void displayMessage() {
         switch (count){
             case 0:

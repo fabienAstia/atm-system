@@ -26,7 +26,7 @@ public class AtmService {
 
         do{
             System.out.println("Veuillez insérer votre carte (Taper 'X')");
-            scanner();
+            read();
         } while (!input.equals("X"));
         do {
             chooseOperation();
@@ -43,7 +43,7 @@ public class AtmService {
         updateAccountInfos(PATH, userInfo);
     }
 
-    public static void scanner(){
+    public static void read(){
         input = scanner.nextLine();
     }
 

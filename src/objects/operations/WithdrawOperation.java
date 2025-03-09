@@ -11,10 +11,10 @@ import static objects.operations.UtilsOperation.count;
 
 public class WithdrawOperation {
 
-    private final Scanner scanner = new Scanner(System.in);
+    private final static Scanner scanner = new Scanner(System.in);
     private static final int AVAILABLE_CASH = 10000;
     private String amountChoice;
-    private Integer amount = -1;
+    private String customAmount;
 
     public WithdrawOperation() {}
 
@@ -41,23 +41,35 @@ public class WithdrawOperation {
     }
 
     private void operation(Scanner scanner, UserInfo userInfo) {
-        System.out.println("Combien souhaitez-vous retirer ? :");
         chooseAmount();
         if (amountChoice.equals("6")) {
-            System.out.println("Entrez le montant à retirer :");
-            amount = Integer.parseInt(scanner.nextLine());
-            withdrawIfPossible(userInfo);
+            do {
+                System.out.println("Combien souhaitez-vous retirer ? : ('X' pour quitter)");
+                read();
+            } while(!customAmount.equals("X") && (!onlyDigits(customAmount) || !withdrawIfPossible(userInfo)));
         } else if (amountChoice.matches("[0-9]+") && Integer.parseInt(amountChoice) >= 1 && Integer.parseInt(amountChoice) <= 5){
-            amount = Objects.requireNonNull(FixedAmount.fromChoice(amountChoice)).getValue();
+            customAmount = String.valueOf(Objects.requireNonNull(FixedAmount.fromChoice(amountChoice)).getValue());
             withdrawIfPossible(userInfo);
         }
     }
 
-    private void withdrawIfPossible(UserInfo userInfo) {
-        if (checkUserHasMoney(userInfo, amount) && checkAtmHasMoney(amount) && checkValidAmount(amount)) {
+    private void read(){
+        customAmount = scanner.nextLine();
+    }
+
+    private boolean onlyDigits(String input){
+        return  input.matches("[0-9]+");
+    }
+
+    private boolean withdrawIfPossible(UserInfo userInfo) {
+        if (checkUserHasMoney(userInfo, Integer.parseInt(customAmount))
+                && checkAtmHasMoney(Integer.parseInt(customAmount))
+                && checkValidAmount(Integer.parseInt(customAmount))) {
             System.out.println("Veuillez récupérer votre argent");
-            userInfo.setBalance(userInfo.getBalance() - amount);
+            userInfo.setBalance(userInfo.getBalance() - Integer.parseInt(customAmount));
+            return true;
         }
+        return false;
     }
 
     public void displayAmounts() {

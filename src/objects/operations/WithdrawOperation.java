@@ -46,11 +46,15 @@ public class WithdrawOperation {
             do {
                 System.out.println("Combien souhaitez-vous retirer ? : ('X' pour quitter)");
                 read();
-            } while(!customAmount.equals("X") && (!onlyDigits(customAmount) || !withdrawIfPossible(userInfo)));
+            } while(isInvalid(userInfo));
         } else if (amountChoice.matches("[0-9]+") && Integer.parseInt(amountChoice) >= 1 && Integer.parseInt(amountChoice) <= 5){
             customAmount = String.valueOf(Objects.requireNonNull(FixedAmount.fromChoice(amountChoice)).getValue());
             withdrawIfPossible(userInfo);
         }
+    }
+
+    private boolean isInvalid(UserInfo userInfo) {
+        return !customAmount.equals("X") && (!onlyDigits(customAmount) || !withdrawIfPossible(userInfo));
     }
 
     private void read(){
@@ -110,6 +114,10 @@ public class WithdrawOperation {
         }
         if (amount > 500) {
             System.out.println("Vous ne pouvez retirer plus de 500€");
+            return false;
+        }
+        if (amount == 0) {
+            System.out.println("Vous devez saisir un montant minimum de 10€.");
             return false;
         }
         return true;

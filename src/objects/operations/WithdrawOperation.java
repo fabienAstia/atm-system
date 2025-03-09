@@ -47,7 +47,7 @@ public class WithdrawOperation {
                 System.out.println("Combien souhaitez-vous retirer ? : ('X' pour quitter)");
                 read();
             } while(isInvalid(userInfo));
-        } else if (onlyDigits(amountChoice) && Integer.parseInt(amountChoice) >= 1 && Integer.parseInt(amountChoice) <= 5){
+        } else if (onlyDigits(amountChoice) && toInt(amountChoice) >= 1 && toInt(amountChoice) <= 5){
             customAmount = String.valueOf(Objects.requireNonNull(FixedAmount.fromChoice(amountChoice)).getValue());
             withdrawIfPossible(userInfo);
         }
@@ -55,6 +55,10 @@ public class WithdrawOperation {
 
     private boolean isInvalid(UserInfo userInfo) {
         return !customAmount.equals("X") && (!onlyDigits(customAmount) || !withdrawIfPossible(userInfo));
+    }
+
+    private Integer toInt(String string){
+        return Integer.parseInt(string);
     }
 
     private void read(){
@@ -66,9 +70,9 @@ public class WithdrawOperation {
     }
 
     private boolean withdrawIfPossible(UserInfo userInfo) {
-        if (checkUserHasMoney(userInfo, Integer.parseInt(customAmount))
-                && checkAtmHasMoney(Integer.parseInt(customAmount))
-                && checkValidAmount(Integer.parseInt(customAmount))) {
+        if (checkUserHasMoney(userInfo, toInt(customAmount))
+                && checkAtmHasMoney(toInt(customAmount))
+                && checkValidAmount(toInt(customAmount))) {
             System.out.println("Veuillez récupérer votre argent");
             userInfo.setBalance(userInfo.getBalance() - Integer.parseInt(customAmount));
             return true;

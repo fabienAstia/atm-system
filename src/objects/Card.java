@@ -4,11 +4,16 @@ import static objects.operations.UtilsOperation.hash;
 
 public class Card {
 
-    private String hashPinCode;
+    private final String hashPinCode;
     private boolean unlocked = false;
 
-    public Card(String pinCode) {
-        this.hashPinCode = hash(pinCode);
+    public Card(UserInfo userInfo) {
+        this.hashPinCode = hash(userInfo.getPincode());
+        this.unlocked = userInfo.isActivated();
+    }
+
+    public String getHashPinCode() {
+        return hashPinCode;
     }
 
     public boolean isUnlocked() {
@@ -19,19 +24,12 @@ public class Card {
         this.unlocked = unlocked;
     }
 
-    public String getHashPinCode() {
-        return hashPinCode;
-    }
-
-    public void setHashPinCode(String pinCode) {
-        this.hashPinCode = hash(pinCode);
-    }
-
     @Override
     public String toString() {
         return "Card{" +
-                "hashPinCode= [PROTECTED]" + '\'' +
-                ", unlocked=" + unlocked +
+                "hashPinCode= [PROTECTED]" +
+                ", unlocked= [PROTECTED]" +
+                ", userinfo= [PROTECTED]" +
                 '}';
     }
 }

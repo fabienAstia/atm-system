@@ -16,8 +16,7 @@ public class WithdrawOperation {
     private String amountChoice;
     private Integer amount = -1;
 
-    public WithdrawOperation() {
-    }
+    public WithdrawOperation() {}
 
     public void doWithdraw(Scanner scanner, UserInfo userInfo, Card card) {
         while (count < 3) {

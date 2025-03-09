@@ -2,22 +2,22 @@
 package objects;
 
 public class UserInfo {
-    private String pinCode;
+    private String pincode;
     private Integer balance;
     private Boolean isActivated;
 
-    public UserInfo(String pinCode, Integer balance, Boolean isActivated) {
-        this.pinCode = pinCode;
+    public UserInfo(String pincode, Integer balance, Boolean isActivated) {
+        this.pincode = pincode;
         this.balance = balance;
         this.isActivated = isActivated;
     }
 
-    public String getPinCode() {
-        return pinCode;
+    public String getPincode() {
+        return pincode;
     }
 
-    public void setPinCode(String pinCode) {
-        this.pinCode = pinCode;
+    public void setPincode(String pincode) {
+        this.pincode = pincode;
     }
 
     public Integer getBalance() {

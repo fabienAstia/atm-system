@@ -15,6 +15,7 @@ public class AtmService {
 
     private static final Scanner scanner = new Scanner(System.in);
     public static final String path = "src/userInfo.txt";
+    private static String input;
 
     public AtmService() {}
 
@@ -23,22 +24,27 @@ public class AtmService {
         UserInfo userInfo = usersInfo.get(1);
         Card card = new Card(userInfo);
 
-        System.out.println("Veuillez insérer votre carte (Taper 'X')");
-        if(scanner.nextLine().equals("X")){
-            do {
-                chooseOperation();
-                if (choice.equals("1")) {
-                    BalanceOperation balanceOperation = new BalanceOperation();
-                    balanceOperation.getBalance(scanner, userInfo, card);
-                }
-                if (choice.equals("2")) {
-                    WithdrawOperation withdrawOperation = new WithdrawOperation();
-                    withdrawOperation.doWithdraw(scanner, userInfo, card);
-                }
-            } while (!choice.equals("X"));
-            System.out.println("bye bye");
-            updateAccountInfos(path, userInfo);
-        }
+        do{
+            System.out.println("Veuillez insérer votre carte (Taper 'X')");
+            input();
+        }while (!input.equals("X"));
+        do {
+            chooseOperation();
+            if (choice.equals("1")) {
+                BalanceOperation balanceOperation = new BalanceOperation();
+                balanceOperation.getBalance(scanner, userInfo, card);
+            }
+            if (choice.equals("2")) {
+                WithdrawOperation withdrawOperation = new WithdrawOperation();
+                withdrawOperation.doWithdraw(scanner, userInfo, card);
+            }
+        } while (!choice.equals("X"));
+        System.out.println("bye bye");
+        updateAccountInfos(path, userInfo);
+    }
+
+    public static void input(){
+        input = scanner.nextLine();
     }
 
     public static void chooseOperation(){

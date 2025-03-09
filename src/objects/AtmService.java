@@ -14,20 +14,20 @@ import static objects.operations.Writer.updateAccountInfos;
 public class AtmService {
 
     private static final Scanner scanner = new Scanner(System.in);
-    public static final String path = "src/userInfo.txt";
+    public static final String PATH = "src/userInfo.txt";
     private static String input;
 
     public AtmService() {}
 
     public void doOperations() {
-        List<UserInfo> usersInfo = buildUsersInfo(readFile(path));
+        List<UserInfo> usersInfo = buildUsersInfo(readFile(PATH));
         UserInfo userInfo = usersInfo.get(1);
         Card card = new Card(userInfo);
 
         do{
             System.out.println("Veuillez insérer votre carte (Taper 'X')");
             scanner();
-        }while (!input.equals("X"));
+        } while (!input.equals("X"));
         do {
             chooseOperation();
             if (choice.equals("1")) {
@@ -40,7 +40,7 @@ public class AtmService {
             }
         } while (!choice.equals("X"));
         System.out.println("bye bye");
-        updateAccountInfos(path, userInfo);
+        updateAccountInfos(PATH, userInfo);
     }
 
     public static void scanner(){

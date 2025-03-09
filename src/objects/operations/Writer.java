@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static objects.AtmService.path;
+import static objects.AtmService.PATH;
 import static objects.operations.Parser.*;
 
 public final class Writer {
 
-    private static final String oldContent = readFile(path);
+    private static final String oldContent = readFile(PATH);
 
     public static void updateAccountInfos(String filePath, UserInfo userInfo) {
         try (FileWriter writer = new FileWriter(filePath)) {

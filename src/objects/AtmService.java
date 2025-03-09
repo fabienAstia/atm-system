@@ -28,12 +28,10 @@ public class AtmService {
             do{
                 chooseOperation();
                 if(choice.equals("1")){
-                    //Operation 1
                     BalanceOperation balanceOperation = new BalanceOperation();
                     balanceOperation.getBalance(scanner, userInfo, card);
                 }
                 if(choice.equals("2")){
-                    //Operation 2
                     WithdrawOperation withdrawOperation = new WithdrawOperation();
                     withdrawOperation.doWithdraw(scanner, userInfo, card);
                 }
@@ -54,5 +52,4 @@ public class AtmService {
         System.out.println("Taper 2 - Effectuer un retrait");
         System.out.println("Taper X - Quitter le programme");
     }
-
 }

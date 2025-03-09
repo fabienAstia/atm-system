@@ -16,7 +16,7 @@ public final class Parser {
         File file = new File(path);
         StringBuilder fileContent = new StringBuilder();
 
-        Scanner sc = null;
+        Scanner sc;
         try {
             sc = new Scanner(file);
         } catch (FileNotFoundException e) {

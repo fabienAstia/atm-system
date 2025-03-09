@@ -3,12 +3,13 @@ package objects;
 import objects.operations.BalanceOperation;
 import objects.operations.WithdrawOperation;
 
+import java.util.List;
 import java.util.Scanner;
 
-import static objects.operations.Parser.buildUserInfo;
+import static objects.operations.Parser.buildUsersInfo;
 import static objects.operations.Parser.readFile;
 import static objects.operations.UtilsOperation.*;
-import static objects.operations.Writer.update;
+import static objects.operations.Writer.updateAccountInfos;
 
 public class AtmService {
 
@@ -18,7 +19,8 @@ public class AtmService {
     public AtmService() {}
 
     public void doOperations() {
-        UserInfo userInfo = buildUserInfo(readFile(path));
+        List<UserInfo> usersInfo = buildUsersInfo(readFile(path));
+        UserInfo userInfo = usersInfo.get(1);
         Card card = new Card(userInfo);
 
         System.out.println("Veuillez insérer votre carte (Taper 'X')");
@@ -37,7 +39,7 @@ public class AtmService {
                 }
             }while (!choice.equals("X"));
             System.out.println("bye bye");
-            update(path, userInfo);
+            updateAccountInfos(path, userInfo);
         }
     }
 

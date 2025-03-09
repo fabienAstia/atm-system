@@ -3,11 +3,13 @@ package objects.operations;
 import objects.UserInfo;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public final class Parser {
 
-    public static Integer initialBalance;
     public static Boolean activated;
 
     public static String readFile(String path) {
@@ -26,14 +28,19 @@ public final class Parser {
         return fileContent.toString();
     }
 
-    public static UserInfo buildUserInfo(String fileContent){
-        String[] array = fileContent.split(",");
-        String pincodeString = array[0].trim();
-        String pinCode = pincodeString.split("= ")[1].trim();
-        String balanceString = array[1].trim();
-        initialBalance = Integer.parseInt(balanceString.split("= ")[1].trim());
-        String activatedString = array[2].trim();
-        activated = Boolean.parseBoolean(activatedString.split("= ")[1].trim());
-        return new UserInfo(pinCode, initialBalance, activated);
+    public static List<UserInfo> buildUsersInfo(String fileContent){
+        List<String> accountInfos = new ArrayList<>(Arrays.asList(fileContent.split("; ")));
+        List<UserInfo> userInfoList = new ArrayList<>();
+        accountInfos.forEach(account -> {
+            String[]infos = account.split(",");
+            String pincodeInfo = infos[0].trim();
+            String pincode = pincodeInfo.split("= ")[1].trim();
+            String balanceInfo = infos[1].trim();
+            Integer initialBalance = Integer.parseInt(balanceInfo.split("= ")[1].trim());
+            String activatedInfo = infos[2].trim();
+            activated = Boolean.parseBoolean(activatedInfo.split("= ")[1].trim());
+            userInfoList.add(new UserInfo(pincode, initialBalance, activated));
+        });
+        return userInfoList;
     }
 }

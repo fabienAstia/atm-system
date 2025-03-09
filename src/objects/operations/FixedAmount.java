@@ -29,7 +29,7 @@ public enum FixedAmount {
                 return a;
             }
         }
-        System.out.println("Ce montant n'est pas dispo");
+        System.out.println("Ce montant n'est pas disponible");
         return null;
     }
 }

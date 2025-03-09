@@ -15,7 +15,6 @@ public final class Writer {
         try (FileWriter writer = new FileWriter(filePath)) {
             String withUpdateBalance = oldContent.replaceFirst(String.valueOf(initialBalance), userInfo.getBalance().toString());
             String newContent = withUpdateBalance.replaceAll(String.valueOf(activated), String.valueOf(userInfo.isActivated()));
-
             writer.write(newContent);
         } catch (IOException e) {
             e.printStackTrace();

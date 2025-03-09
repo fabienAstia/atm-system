@@ -35,4 +35,13 @@ public class UserInfo {
     public void setIsActivated(Boolean isActivated) {
         this.isActivated = isActivated;
     }
+
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "pinCode=[PROTECTED]" + '\'' +
+                ", balance=[PROTECTED]" +
+                ", isActivated=[PROTECTED]" +
+                '}';
+    }
 }

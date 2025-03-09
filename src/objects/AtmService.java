@@ -19,7 +19,7 @@ public class AtmService {
 
     public void doOperations() {
         UserInfo userInfo = buildUserInfo(readFile(path));
-        Card card = new Card(userInfo.getPinCode(), userInfo.isActivated());
+        Card card = new Card(userInfo.getPinCode());
 
         System.out.println("Veuillez insérer votre carte (Taper 'X')");
         if(scanner.nextLine().equals("X")){

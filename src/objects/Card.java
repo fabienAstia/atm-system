@@ -7,17 +7,12 @@ public class Card {
     private String hashPinCode;
     private boolean unlocked = false;
 
-    public boolean isUnlocked() {
-        return unlocked;
-    }
-
-    public Card(String pinCode, boolean unlocked) {
-        this.hashPinCode = hash(pinCode);
-        this.unlocked = unlocked;
-    }
-
     public Card(String pinCode) {
         this.hashPinCode = hash(pinCode);
+    }
+
+    public boolean isUnlocked() {
+        return unlocked;
     }
 
     public void setUnlocked(boolean unlocked) {
@@ -30,5 +25,13 @@ public class Card {
 
     public void setHashPinCode(String pinCode) {
         this.hashPinCode = hash(pinCode);
+    }
+
+    @Override
+    public String toString() {
+        return "Card{" +
+                "hashPinCode= [PROTECTED]" + '\'' +
+                ", unlocked=" + unlocked +
+                '}';
     }
 }

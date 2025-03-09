@@ -47,7 +47,7 @@ public class WithdrawOperation {
                 System.out.println("Combien souhaitez-vous retirer ? : ('X' pour quitter)");
                 read();
             } while(isInvalid(userInfo));
-        } else if (amountChoice.matches("[0-9]+") && Integer.parseInt(amountChoice) >= 1 && Integer.parseInt(amountChoice) <= 5){
+        } else if (onlyDigits(amountChoice) && Integer.parseInt(amountChoice) >= 1 && Integer.parseInt(amountChoice) <= 5){
             customAmount = String.valueOf(Objects.requireNonNull(FixedAmount.fromChoice(amountChoice)).getValue());
             withdrawIfPossible(userInfo);
         }

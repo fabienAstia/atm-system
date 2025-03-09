@@ -16,10 +16,6 @@ public class UserInfo {
         return pincode;
     }
 
-    public void setPincode(String pincode) {
-        this.pincode = pincode;
-    }
-
     public Integer getBalance() {
         return balance;
     }

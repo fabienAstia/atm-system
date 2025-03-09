@@ -1,1 +1,1 @@
-pincode = 0000, balance = 1000, activated = false;pincode = 1234, balance = 1500, activated = false;pincode = 5678, balance = 500, activated = false           
+pincode = 0000, balance = 1000, activated = false;pincode = 1234, balance = 1500, activated = false;pincode = 5678, balance = 500, activated = false            

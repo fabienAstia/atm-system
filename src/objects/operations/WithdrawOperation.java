@@ -43,9 +43,7 @@ public class WithdrawOperation {
     private void operation(Scanner scanner, UserInfo userInfo) {
         System.out.println("Combien souhaitez-vous retirer ? :");
         chooseAmount();
-        if(amountChoice.equals("X")){
-            return;
-        } else if (amountChoice.equals("6")) {
+        if (amountChoice.equals("6")) {
             System.out.println("Entrez le montant à retirer :");
             amount = Integer.parseInt(scanner.nextLine());
             withdrawIfPossible(userInfo);

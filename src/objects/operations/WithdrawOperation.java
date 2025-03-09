@@ -25,7 +25,7 @@ public class WithdrawOperation {
                 String input = scanner.nextLine();
                 if (verifyPinCode(input, card, userInfo)) {
                     count = 0;
-                    operation(scanner, userInfo);
+                    operation(userInfo);
                     return;
                 }
                 count++;
@@ -34,13 +34,13 @@ public class WithdrawOperation {
                     lockCard(card, userInfo);
                 }
             } else {
-                operation(scanner, userInfo);
+                operation(userInfo);
                 return;
             }
         }
     }
 
-    private void operation(Scanner scanner, UserInfo userInfo) {
+    private void operation(UserInfo userInfo) {
         chooseAmount();
         if (amountChoice.equals("6")) {
             do {

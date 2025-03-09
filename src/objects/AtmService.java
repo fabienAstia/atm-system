@@ -25,17 +25,17 @@ public class AtmService {
 
         System.out.println("Veuillez insérer votre carte (Taper 'X')");
         if(scanner.nextLine().equals("X")){
-            do{
+            do {
                 chooseOperation();
-                if(choice.equals("1")){
+                if (choice.equals("1")) {
                     BalanceOperation balanceOperation = new BalanceOperation();
                     balanceOperation.getBalance(scanner, userInfo, card);
                 }
-                if(choice.equals("2")){
+                if (choice.equals("2")) {
                     WithdrawOperation withdrawOperation = new WithdrawOperation();
                     withdrawOperation.doWithdraw(scanner, userInfo, card);
                 }
-            }while (!choice.equals("X"));
+            } while (!choice.equals("X"));
             System.out.println("bye bye");
             updateAccountInfos(path, userInfo);
         }

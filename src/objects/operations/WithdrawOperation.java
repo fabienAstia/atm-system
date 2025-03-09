@@ -43,12 +43,12 @@ public class WithdrawOperation {
     private void operation(Scanner scanner, UserInfo userInfo) {
         System.out.println("Combien souhaitez-vous retirer ? :");
         chooseAmount();
-        if (Integer.parseInt(amountChoice) >= 1 && Integer.parseInt(amountChoice) <= 5) {
-            amount = Objects.requireNonNull(FixedAmount.fromChoice(amountChoice)).getValue();
-            withdrawIfPossible(userInfo);
-        } else if (amountChoice.equals("6")) {
+        if (amountChoice.equals("6")) {
             System.out.println("Entrez le montant à retirer :");
             amount = Integer.parseInt(scanner.nextLine());
+            withdrawIfPossible(userInfo);
+        } else if (amountChoice.matches("[0-9]+") && Integer.parseInt(amountChoice) >= 1 && Integer.parseInt(amountChoice) <= 5){
+            amount = Objects.requireNonNull(FixedAmount.fromChoice(amountChoice)).getValue();
             withdrawIfPossible(userInfo);
         }
     }
@@ -67,6 +67,7 @@ public class WithdrawOperation {
         System.out.println("Taper 4 - 50€");
         System.out.println("Taper 5 - 100€");
         System.out.println("Taper 6 - autre montant");
+        System.out.println("Taper X - quitter");
     }
 
     public void chooseAmount() {

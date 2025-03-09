@@ -43,7 +43,7 @@ public class AtmService {
         updateAccountInfos(PATH, userInfo);
     }
 
-    public static void read(){
+    private void read(){
         input = scanner.nextLine();
     }
 

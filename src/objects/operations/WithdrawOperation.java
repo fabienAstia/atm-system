@@ -76,7 +76,7 @@ public class WithdrawOperation {
         return false;
     }
 
-    public void displayAmounts() {
+    private void displayAmounts() {
         System.out.println("Taper 1 - 20€");
         System.out.println("Taper 2 - 30€");
         System.out.println("Taper 3 - 40€");
@@ -91,7 +91,7 @@ public class WithdrawOperation {
         amountChoice = scanner.nextLine();
     }
 
-    public boolean checkUserHasMoney(UserInfo userInfo, int amount) {
+    private boolean checkUserHasMoney(UserInfo userInfo, int amount) {
         if (userInfo.getBalance() < amount) {
             System.out.println("Votre solde est insuffisant");
             return false;
@@ -99,7 +99,7 @@ public class WithdrawOperation {
         return true;
     }
 
-    public boolean checkAtmHasMoney(int amount) {
+    private boolean checkAtmHasMoney(int amount) {
         if (AVAILABLE_CASH < amount) {
             System.out.println("L'ATM ne dispose pas des fonds suffisant. Veuillez repasser ultérieurement");
             return false;
@@ -107,7 +107,7 @@ public class WithdrawOperation {
         return true;
     }
 
-    public boolean checkValidAmount(int amount) {
+    private boolean checkValidAmount(int amount) {
         if (amount % 10 != 0) {
             System.out.println("Vous devez renseigner un multiple de 10");
             return false;

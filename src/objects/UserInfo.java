@@ -2,7 +2,7 @@
 package objects;
 
 public class UserInfo {
-    private String pincode;
+    private final String pincode;
     private Integer balance;
     private Boolean isActivated;
 

@@ -11,7 +11,7 @@ import static objects.operations.UtilsOperation.count;
 
 public class WithdrawOperation {
 
-    private final static Scanner scanner = new Scanner(System.in);
+    private final static Scanner SCANNER = new Scanner(System.in);
     private static final int AVAILABLE_CASH = 10000;
     private String amountChoice;
     private String customAmount;
@@ -58,7 +58,7 @@ public class WithdrawOperation {
     }
 
     private void read(){
-        customAmount = scanner.nextLine();
+        customAmount = SCANNER.nextLine();
     }
 
     private boolean onlyDigits(String input){
@@ -88,7 +88,7 @@ public class WithdrawOperation {
 
     public void chooseAmount() {
         displayAmounts();
-        amountChoice = scanner.nextLine();
+        amountChoice = SCANNER.nextLine();
     }
 
     private boolean checkUserHasMoney(UserInfo userInfo, int amount) {

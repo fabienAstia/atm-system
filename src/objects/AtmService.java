@@ -13,7 +13,7 @@ import static objects.operations.Writer.updateAccountInfos;
 
 public class AtmService {
 
-    private static final Scanner scanner = new Scanner(System.in);
+    private static final Scanner SCANNER = new Scanner(System.in);
     public static final String PATH = "src/userInfo.txt";
     private static String input;
 
@@ -32,11 +32,11 @@ public class AtmService {
             chooseOperation();
             if (choice.equals("1")) {
                 BalanceOperation balanceOperation = new BalanceOperation();
-                balanceOperation.getBalance(scanner, userInfo, card);
+                balanceOperation.getBalance(SCANNER, userInfo, card);
             }
             if (choice.equals("2")) {
                 WithdrawOperation withdrawOperation = new WithdrawOperation();
-                withdrawOperation.doWithdraw(scanner, userInfo, card);
+                withdrawOperation.doWithdraw(SCANNER, userInfo, card);
             }
         } while (!choice.equals("X"));
         System.out.println("bye bye");
@@ -44,12 +44,12 @@ public class AtmService {
     }
 
     private void read(){
-        input = scanner.nextLine();
+        input = SCANNER.nextLine();
     }
 
     public static void chooseOperation(){
         displayOperations();
-        choice = scanner.nextLine();
+        choice = SCANNER.nextLine();
     }
 
     public static void displayOperations() {

@@ -35,7 +35,7 @@ public class UserInfo {
     @Override
     public String toString() {
         return "UserInfo{" +
-                "pinCode=[PROTECTED]" + '\'' +
+                "pincode=[PROTECTED]" + '\'' +
                 ", balance=[PROTECTED]" +
                 ", isActivated=[PROTECTED]" +
                 '}';

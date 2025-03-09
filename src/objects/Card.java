@@ -5,7 +5,7 @@ import static objects.operations.UtilsOperation.hash;
 public class Card {
 
     private final String hashPinCode;
-    private boolean unlocked = false;
+    private boolean unlocked;
 
     public Card(UserInfo userInfo) {
         this.hashPinCode = hash(userInfo.getPincode());

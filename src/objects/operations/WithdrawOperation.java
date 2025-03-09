@@ -74,7 +74,7 @@ public class WithdrawOperation {
                 && checkAtmHasMoney(toInt(customAmount))
                 && checkValidAmount(toInt(customAmount))) {
             System.out.println("Veuillez récupérer votre argent");
-            userInfo.setBalance(userInfo.getBalance() - Integer.parseInt(customAmount));
+            userInfo.setBalance(userInfo.getBalance() - toInt(customAmount));
             return true;
         }
         return false;

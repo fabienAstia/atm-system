@@ -1,12 +1,12 @@
 package co.simplon.objects.operations;
 
-import co.simplon.objects.Card;
-import co.simplon.objects.MessagePrinter;
-import co.simplon.objects.UserInfo;
+import co.simplon.objects.entities.Card;
+import co.simplon.objects.utils.Printer;
+import co.simplon.objects.entities.UserInfo;
 
 import java.util.Scanner;
 
-import static co.simplon.objects.operations.UtilsOperation.*;
+import static co.simplon.objects.utils.UtilsOperation.*;
 
 public class BalanceOperation {
 
@@ -15,20 +15,20 @@ public class BalanceOperation {
     public void getBalance(Scanner scanner, UserInfo userInfo, Card card){
         while(count < 3) {
             if (!verified) {
-                MessagePrinter.displayMessage();
+                Printer.displayMessage();
                 String input = scanner.nextLine();
                 if (verifyPinCode(input, card, userInfo)) {
                     count = 0;
-                    MessagePrinter.balanceMsg(userInfo.getBalance());
+                    Printer.balanceMsg(userInfo.getBalance());
                     return;
                 }
                 count++;
                 if (count == 3) {
-                    MessagePrinter.displayMessage();
+                    Printer.displayMessage();
                     lockCard(card, userInfo);
                 }
             } else {
-                MessagePrinter.balanceMsg(userInfo.getBalance());
+                Printer.balanceMsg(userInfo.getBalance());
                 return;
             }
         }

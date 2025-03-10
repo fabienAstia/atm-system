@@ -1,17 +1,17 @@
 package co.simplon.objects.operations;
 
-import co.simplon.objects.Card;
-import co.simplon.objects.UserInfo;
+import co.simplon.objects.entities.Card;
+import co.simplon.objects.entities.UserInfo;
 
 import java.util.Objects;
 import java.util.Scanner;
 
-import static co.simplon.objects.MessagePrinter.*;
-import static co.simplon.objects.operations.Converter.onlyDigits;
-import static co.simplon.objects.operations.Converter.toInt;
-import static co.simplon.objects.operations.InputReader.read;
-import static co.simplon.objects.operations.UtilsOperation.*;
-import static co.simplon.objects.operations.UtilsOperation.count;
+import static co.simplon.objects.utils.Printer.*;
+import static co.simplon.objects.utils.Converter.onlyDigits;
+import static co.simplon.objects.utils.Converter.toInt;
+import static co.simplon.objects.utils.Reader.read;
+import static co.simplon.objects.utils.UtilsOperation.*;
+import static co.simplon.objects.utils.UtilsOperation.count;
 
 public class WithdrawOperation {
 

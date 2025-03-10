@@ -1,6 +1,6 @@
-package co.simplon.objects.operations;
+package co.simplon.objects.utils;
 
-import co.simplon.objects.UserInfo;
+import co.simplon.objects.entities.UserInfo;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -11,6 +11,8 @@ import java.util.Scanner;
 public final class Parser {
 
     public static Boolean activated;
+
+    private Parser(){}
 
     public static String readFile(String path) {
         File file = new File(path);

@@ -1,8 +1,8 @@
-package co.simplon.objects;
+package co.simplon.objects.utils;
 
-import static co.simplon.objects.operations.UtilsOperation.count;
+import static co.simplon.objects.utils.UtilsOperation.count;
 
-public class MessagePrinter {
+public class Printer {
 
     public static void insertCardMsg(){
         System.out.println("Veuillez insérer votre carte (Taper 'X')");

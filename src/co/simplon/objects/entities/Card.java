@@ -1,6 +1,6 @@
-package co.simplon.objects;
+package co.simplon.objects.entities;
 
-import static co.simplon.objects.operations.UtilsOperation.hash;
+import static co.simplon.objects.utils.UtilsOperation.hash;
 
 public class Card {
 

@@ -1,6 +1,6 @@
-package co.simplon.objects.operations;
+package co.simplon.objects.utils;
 
-import co.simplon.objects.UserInfo;
+import co.simplon.objects.entities.UserInfo;
 
 import java.io.*;
 import java.nio.file.FileSystemNotFoundException;
@@ -8,11 +8,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static co.simplon.objects.AtmService.PATH;
+import static co.simplon.objects.entities.AtmService.PATH;
 
 public final class Writer {
 
     private static final String oldContent = Parser.readFile(PATH);
+
+    private Writer(){}
 
     public static void updateAccountInfos(String filePath, UserInfo userInfo) {
         try (FileWriter writer = new FileWriter(filePath)) {

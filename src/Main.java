@@ -1,4 +1,4 @@
-import objects.AtmService;
+import co.simplon.objects.AtmService;
 
 public class Main {
     public static void main(String[] args) {

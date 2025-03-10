@@ -1,18 +1,21 @@
-package objects.operations;
+package co.simplon.objects.operations;
 
-import objects.Card;
-import objects.UserInfo;
+import co.simplon.objects.Card;
+import co.simplon.objects.MessagePrinter;
+import co.simplon.objects.UserInfo;
 
 import java.util.Objects;
 import java.util.Scanner;
 
-import static objects.MessagePrinter.*;
-import static objects.operations.UtilsOperation.*;
-import static objects.operations.UtilsOperation.count;
+import static co.simplon.objects.MessagePrinter.*;
+import static co.simplon.objects.operations.Converter.onlyDigits;
+import static co.simplon.objects.operations.Converter.toInt;
+import static co.simplon.objects.operations.InputReader.read;
+import static co.simplon.objects.operations.UtilsOperation.*;
+import static co.simplon.objects.operations.UtilsOperation.count;
 
 public class WithdrawOperation {
 
-    private final static Scanner SCANNER = new Scanner(System.in);
     private static final int AVAILABLE_CASH = 10000;
     private String amountChoice;
     private String customAmount;
@@ -46,7 +49,7 @@ public class WithdrawOperation {
         if (amountChoice.equals("6")) {
             do {
                 chooseAmountMsg();
-                read();
+                readInput();
             } while(isInvalid(userInfo));
         } else if (onlyDigits(amountChoice) && toInt(amountChoice) >= 1 && toInt(amountChoice) <= 5){
             customAmount = String.valueOf(Objects.requireNonNull(FixedAmount.fromChoice(amountChoice)).getValue());
@@ -58,16 +61,8 @@ public class WithdrawOperation {
         return !customAmount.equals("X") && (!onlyDigits(customAmount) || !withdrawIfPossible(userInfo));
     }
 
-    private Integer toInt(String string){
-        return Integer.parseInt(string);
-    }
-
-    private void read(){
-        customAmount = SCANNER.nextLine();
-    }
-
-    private boolean onlyDigits(String input){
-        return  input.matches("[0-9]+");
+    private void readInput(){
+        customAmount = read();
     }
 
     private boolean withdrawIfPossible(UserInfo userInfo) {
@@ -82,13 +77,13 @@ public class WithdrawOperation {
     }
 
     public void chooseAmount() {
-        displayAmounts();
-        amountChoice = SCANNER.nextLine();
+        MessagePrinter.displayAmounts();
+        amountChoice = read();
     }
 
     private boolean checkUserHasMoney(UserInfo userInfo, int amount) {
         if (userInfo.getBalance() < amount) {
-            notEnoughUserCashMsg();
+            MessagePrinter.notEnoughUserCashMsg();
             return false;
         }
         return true;
@@ -96,7 +91,7 @@ public class WithdrawOperation {
 
     private boolean checkAtmHasMoney(int amount) {
         if (AVAILABLE_CASH < amount) {
-            notEnoughAtmCashMsg();
+            MessagePrinter.notEnoughAtmCashMsg();
             return false;
         }
         return true;
@@ -104,15 +99,15 @@ public class WithdrawOperation {
 
     private boolean checkValidAmount(int amount) {
         if (amount % 10 != 0) {
-            isTenMultipleMsg();
+            MessagePrinter.isTenMultipleMsg();
             return false;
         }
         if (amount > 500) {
-            maxAmountToWithdrawMsg();
+            MessagePrinter.maxAmountToWithdrawMsg();
             return false;
         }
         if (amount == 0) {
-            minAmountToWidthdrawMsg();
+            MessagePrinter.minAmountToWidthdrawMsg();
             return false;
         }
         return true;

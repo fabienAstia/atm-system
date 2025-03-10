@@ -1,6 +1,6 @@
-package objects;
+package co.simplon.objects;
 
-import static objects.operations.UtilsOperation.count;
+import static co.simplon.objects.operations.UtilsOperation.count;
 
 public class MessagePrinter {
 

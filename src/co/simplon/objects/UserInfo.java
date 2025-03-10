@@ -1,5 +1,5 @@
 
-package objects;
+package co.simplon.objects;
 
 public class UserInfo {
     private final String pincode;

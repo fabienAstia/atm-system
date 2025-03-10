@@ -1,6 +1,6 @@
-package objects.operations;
+package co.simplon.objects.operations;
 
-import static objects.MessagePrinter.invalidAmountMsg;
+import co.simplon.objects.MessagePrinter;
 
 public enum FixedAmount {
     VINGT_EUROS("1", 20),
@@ -31,7 +31,7 @@ public enum FixedAmount {
                 return a;
             }
         }
-        invalidAmountMsg();
+        MessagePrinter.invalidAmountMsg();
         return null;
     }
 }

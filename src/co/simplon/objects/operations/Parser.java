@@ -1,6 +1,6 @@
-package objects.operations;
+package co.simplon.objects.operations;
 
-import objects.UserInfo;
+import co.simplon.objects.UserInfo;
 
 import java.io.*;
 import java.util.ArrayList;

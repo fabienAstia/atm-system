@@ -1,14 +1,12 @@
-package objects.operations;
+package co.simplon.objects.operations;
 
-import objects.Card;
-import objects.UserInfo;
+import co.simplon.objects.Card;
+import co.simplon.objects.MessagePrinter;
+import co.simplon.objects.UserInfo;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
-import static objects.MessagePrinter.unlockCardMsg;
-import static objects.operations.Parser.activated;
 
 public final class UtilsOperation {
 
@@ -18,7 +16,7 @@ public final class UtilsOperation {
 
     public static boolean verifyPinCode(String input, Card card, UserInfo userInfo){
         if(hash(input).equals(card.getHashPinCode())){
-            if(!activated) {
+            if(!Parser.activated) {
                 unlockCard(card, userInfo);
             }
             return verified = true;
@@ -30,7 +28,7 @@ public final class UtilsOperation {
         if(!card.isUnlocked()){
             card.setUnlocked(true);
             userInfo.setIsActivated(true);
-            unlockCardMsg();
+            MessagePrinter.unlockCardMsg();
         }
     }
 

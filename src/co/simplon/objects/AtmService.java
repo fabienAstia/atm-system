@@ -1,33 +1,28 @@
-package objects;
+package co.simplon.objects;
 
-import objects.operations.BalanceOperation;
-import objects.operations.WithdrawOperation;
+import co.simplon.objects.operations.*;
 
 import java.util.List;
-import java.util.Scanner;
 
-import static objects.MessagePrinter.*;
-import static objects.operations.Parser.buildUsersInfo;
-import static objects.operations.Parser.readFile;
-import static objects.operations.UtilsOperation.*;
-import static objects.operations.Writer.updateAccountInfos;
+import static co.simplon.objects.MessagePrinter.*;
+import static co.simplon.objects.operations.InputReader.*;
+import static co.simplon.objects.operations.UtilsOperation.*;
+import static co.simplon.objects.operations.Writer.updateAccountInfos;
 
 public class AtmService {
 
-    private static final Scanner SCANNER = new Scanner(System.in);
     public static final String PATH = "src/userInfo.txt";
-    private static String input;
 
     public AtmService() {}
 
     public void doOperations() {
-        List<UserInfo> usersInfo = buildUsersInfo(readFile(PATH));
+        List<UserInfo> usersInfo = Parser.buildUsersInfo(Parser.readFile(PATH));
         UserInfo userInfo = usersInfo.get(1);
         Card card = new Card(userInfo);
 
         do{
             insertCardMsg();
-            read();
+            readInput();
         } while (!input.equals("X"));
         do {
             chooseOperation();
@@ -44,13 +39,13 @@ public class AtmService {
         updateAccountInfos(PATH, userInfo);
     }
 
-    private void read(){
-        input = SCANNER.nextLine();
+    private void readInput(){
+        input = read();
     }
 
     public static void chooseOperation(){
         displayOperations();
-        choice = SCANNER.nextLine();
+        choice = read();
     }
 
 }

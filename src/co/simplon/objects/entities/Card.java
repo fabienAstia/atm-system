@@ -7,6 +7,8 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import static co.simplon.objects.utils.Builder.activated;
+
 public class Card {
 
     private final String hashPinCode;
@@ -19,7 +21,7 @@ public class Card {
 
     public boolean verifyPinCode(String input, UserInfo userInfo){
         if(hash(input).equals(this.getHashPinCode())){
-            if(!Parser.activated) {
+            if(!activated) {
                 unlockCard(userInfo);
             }
             return true;

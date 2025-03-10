@@ -5,6 +5,8 @@ import co.simplon.objects.utils.Parser;
 
 import java.util.List;
 
+import static co.simplon.objects.utils.Builder.buildUsersInfo;
+import static co.simplon.objects.utils.Parser.readFile;
 import static co.simplon.objects.utils.Printer.*;
 import static co.simplon.objects.utils.Reader.*;
 import static co.simplon.objects.utils.Writer.updateAccountInfos;
@@ -18,7 +20,7 @@ public class AtmService {
     public AtmService() {}
 
     public void doOperations() {
-        List<UserInfo> usersInfo = Parser.buildUsersInfo(Parser.readFile(PATH));
+        List<UserInfo> usersInfo = buildUsersInfo(readFile(PATH));
         UserInfo userInfo = usersInfo.get(1);
         Card card = new Card(userInfo);
 

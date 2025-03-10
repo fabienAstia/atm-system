@@ -8,11 +8,10 @@ import static co.simplon.objects.utils.Builder.buildUserAccounts;
 import static co.simplon.objects.utils.Parser.readFile;
 import static co.simplon.objects.utils.Printer.*;
 import static co.simplon.objects.utils.Reader.*;
-import static co.simplon.objects.utils.Writer.write;
 
 public class AtmService {
 
-    public static final String PATH = "src/bank_accounts.csv";//"src/userInfo.txt";
+    public static final String PATH = "src/bank_accounts.csv";
     public static boolean verified = false;
     public static Integer count = 0;
 
@@ -41,8 +40,7 @@ public class AtmService {
             }
         } while (!choice.equals("X"));
         quitMsg();
-        //updateAccountInfos(PATH, userAccount);
-        write(PATH, userAccount);
+        Bank.updateBankAccount(userAccount);
     }
 
     public static String chooseOperation(){

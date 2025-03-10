@@ -3,26 +3,25 @@ package co.simplon.objects.utils;
 import co.simplon.objects.entities.UserAccount;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Builder {
 
     public static Boolean activated;
 
-    public static List<UserAccount> buildUserAccounts(String fileContent){
-        List<String> accountInfos = new ArrayList<>(Arrays.asList(fileContent.split("; ")));
-        List<UserAccount> userAccountList = new ArrayList<>();
-        accountInfos.forEach(account -> {
-            String[]infos = account.split(",");
-            String pincodeInfo = infos[0].trim();
-            String pincode = pincodeInfo.split("= ")[1].trim();
-            String balanceInfo = infos[1].trim();
-            Integer initialBalance = Integer.parseInt(balanceInfo.split("= ")[1].trim());
-            String activatedInfo = infos[2].trim();
-            activated = Boolean.parseBoolean(activatedInfo.split("= ")[1].trim());
-            userAccountList.add(new UserAccount(pincode, initialBalance, activated));
+    public static List<UserAccount> buildUserAccounts(List<List<String>> datas){
+        List<UserAccount> accounts = new ArrayList<>();
+        datas.stream()
+                .skip(1)
+                .forEach(record -> {
+                        UserAccount userAccount = new UserAccount(
+                                Integer.parseInt(record.get(0)),
+                                Integer.parseInt(record.get(1)),
+                                record.get(2),
+                                activated = Boolean.parseBoolean(record.get(3)));
+                        accounts.add(userAccount);
         });
-        return userAccountList;
+        return accounts;
     }
+
 }

@@ -11,7 +11,6 @@ import java.security.NoSuchAlgorithmException;
 public final class UtilsOperation {
 
     public static Integer count = 0;
-    public static String choice;
     public static boolean verified = false;
 
     public static boolean verifyPinCode(String input, Card card, UserInfo userInfo){

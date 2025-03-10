@@ -6,7 +6,6 @@ import java.util.List;
 
 import static co.simplon.objects.MessagePrinter.*;
 import static co.simplon.objects.operations.InputReader.*;
-import static co.simplon.objects.operations.UtilsOperation.*;
 import static co.simplon.objects.operations.Writer.updateAccountInfos;
 
 public class AtmService {
@@ -19,13 +18,15 @@ public class AtmService {
         List<UserInfo> usersInfo = Parser.buildUsersInfo(Parser.readFile(PATH));
         UserInfo userInfo = usersInfo.get(1);
         Card card = new Card(userInfo);
+
         String input;
         do{
             insertCardMsg();
             input = read();
         } while (!input.equals("X"));
+        String choice;
         do {
-            chooseOperation();
+            choice = chooseOperation();
             if (choice.equals("1")) {
                 BalanceOperation balanceOperation = new BalanceOperation();
                 balanceOperation.getBalance(SCANNER, userInfo, card);
@@ -39,13 +40,9 @@ public class AtmService {
         updateAccountInfos(PATH, userInfo);
     }
 
-//    private void readInput(){
-//        input = read();
-//    }
-
-    public static void chooseOperation(){
+    public static String chooseOperation(){
         displayOperations();
-        choice = read();
+        return read();
     }
 
 }

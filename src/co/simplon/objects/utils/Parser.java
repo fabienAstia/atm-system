@@ -18,20 +18,17 @@ public final class Parser {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("records"+records);
-
         return records;
     }
 
     private static List<String> getRecordFromLine(String line) {
-        List<String> values = new ArrayList<String>();
+        List<String> values = new ArrayList<>();
         try (Scanner rowScanner = new Scanner(line)) {
             rowScanner.useDelimiter(";");
             while (rowScanner.hasNext()) {
                 values.add(rowScanner.next());
             }
         }
-        System.out.println("values"+values);
         return values;
     }
 

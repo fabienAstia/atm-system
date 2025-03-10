@@ -8,6 +8,7 @@ import static co.simplon.objects.utils.Builder.buildUserAccounts;
 import static co.simplon.objects.utils.Parser.readFile;
 import static co.simplon.objects.utils.Printer.*;
 import static co.simplon.objects.utils.Reader.*;
+import static co.simplon.objects.utils.Writer.write;
 
 public class AtmService {
 
@@ -41,6 +42,7 @@ public class AtmService {
         } while (!choice.equals("X"));
         quitMsg();
         //updateAccountInfos(PATH, userAccount);
+        write(PATH, userAccount);
     }
 
     public static String chooseOperation(){

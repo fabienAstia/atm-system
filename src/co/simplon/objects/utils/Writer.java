@@ -2,8 +2,8 @@ package co.simplon.objects.utils;
 
 import co.simplon.objects.entities.UserAccount;
 
-import java.io.*;
-import java.nio.file.FileSystemNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +15,24 @@ public final class Writer {
     private static final List<List<String>> oldContent = Parser.readFile(PATH);
 
     private Writer(){}
+
+    public static void write(String filePath, UserAccount userAccount){
+        try (FileWriter writer = new FileWriter(filePath)) {
+            List<UserAccount> accounts = new ArrayList<>();
+            List<String> matchingAccount = oldContent.stream()
+                    .filter(row -> String.valueOf(row.get(2)).equals(userAccount.getPincode()))
+                    .findAny()
+                    .orElseThrow(() -> new IllegalArgumentException("Aucun compte trouvé avec ce PIN."));
+            matchingAccount.set(1, userAccount.getBalance().toString());
+            matchingAccount.set(3, userAccount.isActivated().toString());
+
+            writer.write(oldContent.toString());
+
+            //writer.write(String.join(";\r", accounts));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 //    public static void updateAccountInfos(String filePath, UserAccount userAccount) {
 //        try (FileWriter writer = new FileWriter(filePath)) {

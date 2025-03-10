@@ -19,10 +19,10 @@ public class AtmService {
         List<UserInfo> usersInfo = Parser.buildUsersInfo(Parser.readFile(PATH));
         UserInfo userInfo = usersInfo.get(1);
         Card card = new Card(userInfo);
-
+        String input;
         do{
             insertCardMsg();
-            readInput();
+            input = read();
         } while (!input.equals("X"));
         do {
             chooseOperation();
@@ -39,9 +39,9 @@ public class AtmService {
         updateAccountInfos(PATH, userInfo);
     }
 
-    private void readInput(){
-        input = read();
-    }
+//    private void readInput(){
+//        input = read();
+//    }
 
     public static void chooseOperation(){
         displayOperations();

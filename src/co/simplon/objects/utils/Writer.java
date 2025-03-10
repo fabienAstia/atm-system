@@ -1,6 +1,6 @@
 package co.simplon.objects.utils;
 
-import co.simplon.objects.entities.UserInfo;
+import co.simplon.objects.entities.UserAccount;
 
 import java.io.*;
 import java.nio.file.FileSystemNotFoundException;
@@ -16,14 +16,14 @@ public final class Writer {
 
     private Writer(){}
 
-    public static void updateAccountInfos(String filePath, UserInfo userInfo) {
+    public static void updateAccountInfos(String filePath, UserAccount userAccount) {
         try (FileWriter writer = new FileWriter(filePath)) {
             List<String> accounts = new ArrayList<>(List.of(oldContent.split("; ")));
             String account = accounts.stream()
-                    .filter(a -> a.split(", ")[0].split("= ")[1].equals(userInfo.getPincode())).findAny().orElseThrow(FileSystemNotFoundException::new);
+                    .filter(a -> a.split(", ")[0].split("= ")[1].equals(userAccount.getPincode())).findAny().orElseThrow(FileSystemNotFoundException::new);
             List<String> details = new ArrayList<>(Arrays.asList(account.split(", ")));
-            String updateBalance = details.get(1).replaceFirst(details.get(1).split("= ")[1], userInfo.getBalance().toString());
-            String updateStatus = details.get(2).replaceFirst(details.get(2).split("= ")[1], String.valueOf(userInfo.isActivated()));
+            String updateBalance = details.get(1).replaceFirst(details.get(1).split("= ")[1], userAccount.getBalance().toString());
+            String updateStatus = details.get(2).replaceFirst(details.get(2).split("= ")[1], String.valueOf(userAccount.isActivated()));
             details.set(1, updateBalance);
             details.set(2, updateStatus);
             accounts.set(1, String.join(", ", details));

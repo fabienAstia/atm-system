@@ -1,6 +1,5 @@
 package co.simplon.objects.entities;
 
-import co.simplon.objects.utils.Parser;
 import co.simplon.objects.utils.Printer;
 
 import java.nio.charset.StandardCharsets;
@@ -14,30 +13,30 @@ public class Card {
     private final String hashPinCode;
     private boolean unlocked;
 
-    public Card(UserInfo userInfo) {
-        this.hashPinCode = hash(userInfo.getPincode());
-        this.unlocked = userInfo.isActivated();
+    public Card(UserAccount userAccount) {
+        this.hashPinCode = hash(userAccount.getPincode());
+        this.unlocked = userAccount.isActivated();
     }
 
-    public boolean verifyPinCode(String input, UserInfo userInfo){
+    public boolean verifyPinCode(String input, UserAccount userAccount){
         if(hash(input).equals(this.getHashPinCode())){
             if(!activated) {
-                unlockCard(userInfo);
+                unlockCard(userAccount);
             }
             return true;
         }
         return false;
     }
 
-    private void unlockCard(UserInfo userInfo) {
+    private void unlockCard(UserAccount userAccount) {
         this.unlocked = true;
-        userInfo.setIsActivated(true);
+        userAccount.setIsActivated(true);
         Printer.unlockCardMsg();
     }
 
-    public void lockCard(UserInfo userInfo) {
+    public void lockCard(UserAccount userAccount) {
         this.unlocked = false;
-        userInfo.setIsActivated(false);
+        userAccount.setIsActivated(false);
     }
 
     public String hash(String pinCode) {

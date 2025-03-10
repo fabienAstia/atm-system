@@ -1,6 +1,6 @@
 package co.simplon.objects.utils;
 
-import co.simplon.objects.entities.UserInfo;
+import co.simplon.objects.entities.UserAccount;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,9 +10,9 @@ public class Builder {
 
     public static Boolean activated;
 
-    public static List<UserInfo> buildUsersInfo(String fileContent){
+    public static List<UserAccount> buildUserAccounts(String fileContent){
         List<String> accountInfos = new ArrayList<>(Arrays.asList(fileContent.split("; ")));
-        List<UserInfo> userInfoList = new ArrayList<>();
+        List<UserAccount> userAccountList = new ArrayList<>();
         accountInfos.forEach(account -> {
             String[]infos = account.split(",");
             String pincodeInfo = infos[0].trim();
@@ -21,8 +21,8 @@ public class Builder {
             Integer initialBalance = Integer.parseInt(balanceInfo.split("= ")[1].trim());
             String activatedInfo = infos[2].trim();
             activated = Boolean.parseBoolean(activatedInfo.split("= ")[1].trim());
-            userInfoList.add(new UserInfo(pincode, initialBalance, activated));
+            userAccountList.add(new UserAccount(pincode, initialBalance, activated));
         });
-        return userInfoList;
+        return userAccountList;
     }
 }

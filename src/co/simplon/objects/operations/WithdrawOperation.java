@@ -1,7 +1,7 @@
 package co.simplon.objects.operations;
 
 import co.simplon.objects.entities.Card;
-import co.simplon.objects.entities.UserInfo;
+import co.simplon.objects.entities.UserAccount;
 
 import java.util.Objects;
 
@@ -18,54 +18,54 @@ public class WithdrawOperation {
 
     public WithdrawOperation() {}
 
-    public void doWithdraw(UserInfo userInfo, Card card) {
+    public void doWithdraw(UserAccount userAccount, Card card) {
         while (count < 3) {
             if (!verified) {
                 pincodeMessage();
                 String input = read();
-                if (card.verifyPinCode(input, userInfo)) {
+                if (card.verifyPinCode(input, userAccount)) {
                     verified = true;
                     count = 0;
-                    operation(userInfo);
+                    operation(userAccount);
                     return;
                 }
                 count++;
                 if (count == 3) {
                     pincodeMessage();
-                    card.lockCard(userInfo);
+                    card.lockCard(userAccount);
                 }
             } else {
-                operation(userInfo);
+                operation(userAccount);
                 return;
             }
         }
     }
 
-    private void operation(UserInfo userInfo) {
+    private void operation(UserAccount userAccount) {
         String amountChoice = chooseAmount();
         String customAmount;
         if (amountChoice.equals("6")) {
             do {
                 chooseAmountMsg();
                 customAmount = read();
-            } while(isInvalid(userInfo, customAmount));
+            } while(isInvalid(userAccount, customAmount));
         } else if (onlyDigits(amountChoice) && toInt(amountChoice) >= 1 && toInt(amountChoice) <= 5){
             customAmount = String.valueOf(Objects.requireNonNull(FixedAmount.fromChoice(amountChoice)).getValue());
-            withdrawIfPossible(userInfo, customAmount);
+            withdrawIfPossible(userAccount, customAmount);
         }
     }
 
-    private boolean isInvalid(UserInfo userInfo, String customAmount) {
+    private boolean isInvalid(UserAccount userAccount, String customAmount) {
         return !customAmount.equals("X")
-                && (!onlyDigits(customAmount) || !withdrawIfPossible(userInfo, customAmount));
+                && (!onlyDigits(customAmount) || !withdrawIfPossible(userAccount, customAmount));
     }
 
-    private boolean withdrawIfPossible(UserInfo userInfo, String customAmount) {
-        if (checkUserHasMoney(userInfo, toInt(customAmount))
+    private boolean withdrawIfPossible(UserAccount userAccount, String customAmount) {
+        if (checkUserHasMoney(userAccount, toInt(customAmount))
                 && checkAtmHasMoney(toInt(customAmount))
                 && checkValidAmount(toInt(customAmount))) {
             successWithdrawMsg();
-            userInfo.setBalance(userInfo.getBalance() - toInt(customAmount));
+            userAccount.setBalance(userAccount.getBalance() - toInt(customAmount));
             return true;
         }
         return false;
@@ -76,8 +76,8 @@ public class WithdrawOperation {
         return read();
     }
 
-    private boolean checkUserHasMoney(UserInfo userInfo, int amount) {
-        if (userInfo.getBalance() < amount) {
+    private boolean checkUserHasMoney(UserAccount userAccount, int amount) {
+        if (userAccount.getBalance() < amount) {
             notEnoughUserCashMsg();
             return false;
         }

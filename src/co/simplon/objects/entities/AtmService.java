@@ -1,11 +1,10 @@
 package co.simplon.objects.entities;
 
 import co.simplon.objects.operations.*;
-import co.simplon.objects.utils.Parser;
 
 import java.util.List;
 
-import static co.simplon.objects.utils.Builder.buildUsersInfo;
+import static co.simplon.objects.utils.Builder.buildUserAccounts;
 import static co.simplon.objects.utils.Parser.readFile;
 import static co.simplon.objects.utils.Printer.*;
 import static co.simplon.objects.utils.Reader.*;
@@ -20,9 +19,9 @@ public class AtmService {
     public AtmService() {}
 
     public void doOperations() {
-        List<UserInfo> usersInfo = buildUsersInfo(readFile(PATH));
-        UserInfo userInfo = usersInfo.get(1);
-        Card card = new Card(userInfo);
+        List<UserAccount> usersInfo = buildUserAccounts(readFile(PATH));
+        UserAccount userAccount = usersInfo.get(1);
+        Card card = new Card(userAccount);
 
         String input;
         do{
@@ -34,15 +33,15 @@ public class AtmService {
             choice = chooseOperation();
             if (choice.equals("1")) {
                 BalanceOperation balanceOperation = new BalanceOperation();
-                balanceOperation.getBalance(userInfo, card);
+                balanceOperation.getBalance(userAccount, card);
             }
             if (choice.equals("2")) {
                 WithdrawOperation withdrawOperation = new WithdrawOperation();
-                withdrawOperation.doWithdraw(userInfo, card);
+                withdrawOperation.doWithdraw(userAccount, card);
             }
         } while (!choice.equals("X"));
         quitMsg();
-        updateAccountInfos(PATH, userInfo);
+        updateAccountInfos(PATH, userAccount);
     }
 
     public static String chooseOperation(){

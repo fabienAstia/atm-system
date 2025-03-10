@@ -1,7 +1,7 @@
 package co.simplon.objects.operations;
 
 import co.simplon.objects.entities.Card;
-import co.simplon.objects.entities.UserInfo;
+import co.simplon.objects.entities.UserAccount;
 
 import static co.simplon.objects.entities.AtmService.count;
 import static co.simplon.objects.entities.AtmService.verified;
@@ -13,24 +13,24 @@ public class BalanceOperation {
 
     public BalanceOperation() {}
 
-    public void getBalance(UserInfo userInfo, Card card){
+    public void getBalance(UserAccount userAccount, Card card){
         while(count < 3) {
             if (!verified) {
                 pincodeMessage();
                 String input = read();
-                if (card.verifyPinCode(input, userInfo)) {
+                if (card.verifyPinCode(input, userAccount)) {
                     verified = true;
                     count = 0;
-                    displayBalanceMsg(userInfo.getBalance());
+                    displayBalanceMsg(userAccount.getBalance());
                     return;
                 }
                 count++;
                 if (count == 3) {
                     pincodeMessage();
-                    card.lockCard(userInfo);
+                    card.lockCard(userAccount);
                 }
             } else {
-                displayBalanceMsg(userInfo.getBalance());
+                displayBalanceMsg(userAccount.getBalance());
                 return;
             }
         }

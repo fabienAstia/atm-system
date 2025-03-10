@@ -61,14 +61,6 @@ public class Card {
         return hashPinCode;
     }
 
-    public boolean isUnlocked() {
-        return unlocked;
-    }
-
-    public void setUnlocked(boolean unlocked) {
-        this.unlocked = unlocked;
-    }
-
     @Override
     public String toString() {
         return "Card{" +

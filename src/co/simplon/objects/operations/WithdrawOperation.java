@@ -4,14 +4,13 @@ import co.simplon.objects.entities.Card;
 import co.simplon.objects.entities.UserInfo;
 
 import java.util.Objects;
-import java.util.Scanner;
 
+import static co.simplon.objects.entities.AtmService.count;
+import static co.simplon.objects.entities.AtmService.verified;
 import static co.simplon.objects.utils.Printer.*;
 import static co.simplon.objects.utils.Converter.onlyDigits;
 import static co.simplon.objects.utils.Converter.toInt;
 import static co.simplon.objects.utils.Reader.read;
-import static co.simplon.objects.utils.UtilsOperation.*;
-import static co.simplon.objects.utils.UtilsOperation.count;
 
 public class WithdrawOperation {
 
@@ -19,20 +18,21 @@ public class WithdrawOperation {
 
     public WithdrawOperation() {}
 
-    public void doWithdraw(Scanner scanner, UserInfo userInfo, Card card) {
+    public void doWithdraw(UserInfo userInfo, Card card) {
         while (count < 3) {
             if (!verified) {
-                displayMessage();
-                String input = scanner.nextLine();
-                if (verifyPinCode(input, card, userInfo)) {
+                pincodeMessage();
+                String input = read();
+                if (card.verifyPinCode(input, userInfo)) {
+                    verified = true;
                     count = 0;
                     operation(userInfo);
                     return;
                 }
                 count++;
                 if (count == 3) {
-                    displayMessage();
-                    lockCard(card, userInfo);
+                    pincodeMessage();
+                    card.lockCard(userInfo);
                 }
             } else {
                 operation(userInfo);

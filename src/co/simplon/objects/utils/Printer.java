@@ -1,6 +1,6 @@
 package co.simplon.objects.utils;
 
-import static co.simplon.objects.utils.UtilsOperation.count;
+import static co.simplon.objects.entities.AtmService.count;
 
 public class Printer {
 
@@ -8,7 +8,7 @@ public class Printer {
         System.out.println("Veuillez insérer votre carte (Taper 'X')");
     }
 
-    public static void balanceMsg(Integer balance){
+    public static void displayBalanceMsg(Integer balance){
         System.out.println("Le solde de votre compte est : " + balance);
     }
 
@@ -53,7 +53,7 @@ public class Printer {
         System.out.println("Votre carte est activée.");
     }
 
-    public static void displayMessage() {
+    public static void pincodeMessage() {
         switch (count){
             case 0:
                 System.out.println("(" + (count + 1) + "/" + "3" + ") "

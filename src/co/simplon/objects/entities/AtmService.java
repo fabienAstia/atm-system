@@ -12,6 +12,8 @@ import static co.simplon.objects.utils.Writer.updateAccountInfos;
 public class AtmService {
 
     public static final String PATH = "src/userInfo.txt";
+    public static boolean verified = false;
+    public static Integer count = 0;
 
     public AtmService() {}
 
@@ -30,11 +32,11 @@ public class AtmService {
             choice = chooseOperation();
             if (choice.equals("1")) {
                 BalanceOperation balanceOperation = new BalanceOperation();
-                balanceOperation.getBalance(SCANNER, userInfo, card);
+                balanceOperation.getBalance(userInfo, card);
             }
             if (choice.equals("2")) {
                 WithdrawOperation withdrawOperation = new WithdrawOperation();
-                withdrawOperation.doWithdraw(SCANNER, userInfo, card);
+                withdrawOperation.doWithdraw(userInfo, card);
             }
         } while (!choice.equals("X"));
         quitMsg();

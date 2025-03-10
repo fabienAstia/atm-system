@@ -1,34 +1,36 @@
 package co.simplon.objects.operations;
 
 import co.simplon.objects.entities.Card;
-import co.simplon.objects.utils.Printer;
 import co.simplon.objects.entities.UserInfo;
 
-import java.util.Scanner;
-
-import static co.simplon.objects.utils.UtilsOperation.*;
+import static co.simplon.objects.entities.AtmService.count;
+import static co.simplon.objects.entities.AtmService.verified;
+import static co.simplon.objects.utils.Printer.displayBalanceMsg;
+import static co.simplon.objects.utils.Printer.pincodeMessage;
+import static co.simplon.objects.utils.Reader.read;
 
 public class BalanceOperation {
 
     public BalanceOperation() {}
 
-    public void getBalance(Scanner scanner, UserInfo userInfo, Card card){
+    public void getBalance(UserInfo userInfo, Card card){
         while(count < 3) {
             if (!verified) {
-                Printer.displayMessage();
-                String input = scanner.nextLine();
-                if (verifyPinCode(input, card, userInfo)) {
+                pincodeMessage();
+                String input = read();
+                if (card.verifyPinCode(input, userInfo)) {
+                    verified = true;
                     count = 0;
-                    Printer.balanceMsg(userInfo.getBalance());
+                    displayBalanceMsg(userInfo.getBalance());
                     return;
                 }
                 count++;
                 if (count == 3) {
-                    Printer.displayMessage();
-                    lockCard(card, userInfo);
+                    pincodeMessage();
+                    card.lockCard(userInfo);
                 }
             } else {
-                Printer.balanceMsg(userInfo.getBalance());
+                displayBalanceMsg(userInfo.getBalance());
                 return;
             }
         }

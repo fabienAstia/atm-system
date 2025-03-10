@@ -6,6 +6,7 @@ import objects.operations.WithdrawOperation;
 import java.util.List;
 import java.util.Scanner;
 
+import static objects.MessagePrinter.*;
 import static objects.operations.Parser.buildUsersInfo;
 import static objects.operations.Parser.readFile;
 import static objects.operations.UtilsOperation.*;
@@ -25,7 +26,7 @@ public class AtmService {
         Card card = new Card(userInfo);
 
         do{
-            System.out.println("Veuillez insérer votre carte (Taper 'X')");
+            insertCardMsg();
             read();
         } while (!input.equals("X"));
         do {
@@ -39,7 +40,7 @@ public class AtmService {
                 withdrawOperation.doWithdraw(SCANNER, userInfo, card);
             }
         } while (!choice.equals("X"));
-        System.out.println("bye bye");
+        quitMsg();
         updateAccountInfos(PATH, userInfo);
     }
 
@@ -52,10 +53,4 @@ public class AtmService {
         choice = SCANNER.nextLine();
     }
 
-    public static void displayOperations() {
-        System.out.println("Veuillez choisir une opération : ");
-        System.out.println("Taper 1 - Consulter le solde de votre compte");
-        System.out.println("Taper 2 - Effectuer un retrait");
-        System.out.println("Taper X - Quitter le programme");
-    }
 }

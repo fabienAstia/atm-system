@@ -1,5 +1,7 @@
 package objects.operations;
 
+import static objects.MessagePrinter.invalidAmountMsg;
+
 public enum FixedAmount {
     VINGT_EUROS("1", 20),
     TRENTE_EUROS("2", 30),
@@ -29,7 +31,7 @@ public enum FixedAmount {
                 return a;
             }
         }
-        System.out.println("Ce montant n'est pas disponible");
+        invalidAmountMsg();
         return null;
     }
 }

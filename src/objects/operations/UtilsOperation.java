@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import static objects.MessagePrinter.unlockCardMsg;
 import static objects.operations.Parser.activated;
 
 public final class UtilsOperation {
@@ -29,31 +30,13 @@ public final class UtilsOperation {
         if(!card.isUnlocked()){
             card.setUnlocked(true);
             userInfo.setIsActivated(true);
-            System.out.println("Votre carte est activée.");
+            unlockCardMsg();
         }
     }
 
     public static void lockCard(Card card, UserInfo userInfo) {
         card.setUnlocked(false);
         userInfo.setIsActivated(false);
-    }
-
-    public static void displayMessage() {
-        switch (count){
-            case 0:
-                System.out.println("(" + (count + 1) + "/" + "3" + ") "
-                        + "Entrez votre code PIN :");
-                break;
-
-            case 1, 2:
-                System.out.println("(" + (count + 1) + "/" + "3" + ") "
-                        + "Erreur, veuillez saisir votre code PIN");
-                break;
-
-            case 3:
-                System.out.println("Votre carte est avalée. Veuillez contacter votre agence bancaire.");
-                break;
-        }
     }
 
     public static String hash(String pinCode) {

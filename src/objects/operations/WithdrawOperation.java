@@ -6,6 +6,7 @@ import objects.UserInfo;
 import java.util.Objects;
 import java.util.Scanner;
 
+import static objects.MessagePrinter.*;
 import static objects.operations.UtilsOperation.*;
 import static objects.operations.UtilsOperation.count;
 
@@ -44,7 +45,7 @@ public class WithdrawOperation {
         chooseAmount();
         if (amountChoice.equals("6")) {
             do {
-                System.out.println("Combien souhaitez-vous retirer ? : ('X' pour quitter)");
+                chooseAmountMsg();
                 read();
             } while(isInvalid(userInfo));
         } else if (onlyDigits(amountChoice) && toInt(amountChoice) >= 1 && toInt(amountChoice) <= 5){
@@ -73,21 +74,11 @@ public class WithdrawOperation {
         if (checkUserHasMoney(userInfo, toInt(customAmount))
                 && checkAtmHasMoney(toInt(customAmount))
                 && checkValidAmount(toInt(customAmount))) {
-            System.out.println("Veuillez récupérer votre argent");
+            successWithdrawMsg();
             userInfo.setBalance(userInfo.getBalance() - toInt(customAmount));
             return true;
         }
         return false;
-    }
-
-    private void displayAmounts() {
-        System.out.println("Taper 1 - 20€");
-        System.out.println("Taper 2 - 30€");
-        System.out.println("Taper 3 - 40€");
-        System.out.println("Taper 4 - 50€");
-        System.out.println("Taper 5 - 100€");
-        System.out.println("Taper 6 - autre montant");
-        System.out.println("Taper X - quitter");
     }
 
     public void chooseAmount() {
@@ -97,7 +88,7 @@ public class WithdrawOperation {
 
     private boolean checkUserHasMoney(UserInfo userInfo, int amount) {
         if (userInfo.getBalance() < amount) {
-            System.out.println("Votre solde est insuffisant");
+            notEnoughUserCashMsg();
             return false;
         }
         return true;
@@ -105,7 +96,7 @@ public class WithdrawOperation {
 
     private boolean checkAtmHasMoney(int amount) {
         if (AVAILABLE_CASH < amount) {
-            System.out.println("L'ATM ne dispose pas des fonds suffisant. Veuillez repasser ultérieurement");
+            notEnoughAtmCashMsg();
             return false;
         }
         return true;
@@ -113,15 +104,15 @@ public class WithdrawOperation {
 
     private boolean checkValidAmount(int amount) {
         if (amount % 10 != 0) {
-            System.out.println("Vous devez renseigner un multiple de 10");
+            isTenMultipleMsg();
             return false;
         }
         if (amount > 500) {
-            System.out.println("Vous ne pouvez retirer plus de 500€");
+            maxAmountToWithdrawMsg();
             return false;
         }
         if (amount == 0) {
-            System.out.println("Vous devez saisir un montant minimum de 10€.");
+            minAmountToWidthdrawMsg();
             return false;
         }
         return true;

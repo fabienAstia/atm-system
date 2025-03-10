@@ -5,6 +5,8 @@ import objects.UserInfo;
 
 import java.util.Scanner;
 
+import static objects.MessagePrinter.balanceMsg;
+import static objects.MessagePrinter.displayMessage;
 import static objects.operations.UtilsOperation.*;
 
 public class BalanceOperation {
@@ -18,7 +20,7 @@ public class BalanceOperation {
                 String input = scanner.nextLine();
                 if (verifyPinCode(input, card, userInfo)) {
                     count = 0;
-                    System.out.println("Le solde de votre compte est : " + userInfo.getBalance());
+                    balanceMsg(userInfo.getBalance());
                     return;
                 }
                 count++;
@@ -27,7 +29,7 @@ public class BalanceOperation {
                     lockCard(card, userInfo);
                 }
             } else {
-                System.out.println("Le solde de votre compte est : " + userInfo.getBalance());
+                balanceMsg(userInfo.getBalance());
                 return;
             }
         }

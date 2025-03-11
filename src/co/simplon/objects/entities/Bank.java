@@ -3,22 +3,22 @@ package co.simplon.objects.entities;
 import java.util.List;
 
 import static co.simplon.objects.utils.Builder.buildUserAccounts;
-import static co.simplon.objects.utils.Parser.readFile;
-import static co.simplon.objects.utils.Writer.write;
+import static co.simplon.objects.utils.Parser.readBankFile;
+import static co.simplon.objects.utils.Writer.writeBankFile;
 
 public class Bank {
 
     private static final String PATH = "src/bank_accounts.csv";
-    private List<Account> accounts = buildUserAccounts(readFile(PATH));
+    private List<Account> accounts = buildUserAccounts(readBankFile(PATH));
 
     public Bank() {}
 
     public static void updateBankAccount(Account account) {
-        List<List<String>> oldContent = readFile(PATH);
+        List<List<String>> oldContent = readBankFile(PATH);
         List<String> matchingAccount = getAccountByBban(account, oldContent);
         matchingAccount.set(2, account.getBalance().toString());
         matchingAccount.set(4, account.isActivated().toString());
-        write(PATH, oldContent);
+        writeBankFile(PATH, oldContent);
     }
 
     private static List<String> getAccountByBban(Account account, List<List<String>> oldContent) {

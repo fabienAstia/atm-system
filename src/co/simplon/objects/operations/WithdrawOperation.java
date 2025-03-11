@@ -11,14 +11,19 @@ import java.util.Objects;
 import static co.simplon.objects.entities.AtmService.count;
 import static co.simplon.objects.entities.AtmService.verified;
 import static co.simplon.objects.entities.Bank.checkAccountHasMoney;
+import static co.simplon.objects.utils.Builder.buildAtmCash;
+import static co.simplon.objects.utils.Parser.readAtmFile;
 import static co.simplon.objects.utils.Printer.*;
 import static co.simplon.objects.utils.Converter.onlyDigits;
 import static co.simplon.objects.utils.Converter.toInt;
 import static co.simplon.objects.utils.Reader.read;
+import static co.simplon.objects.utils.Writer.writeAtmFile;
 
 public class WithdrawOperation {
 
-    private static final int AVAILABLE_CASH = 10000;
+    //private static final int AVAILABLE_CASH = 10000;*
+    public static Integer availableCash = toInt(buildAtmCash(readAtmFile("src/available_cash.csv")));
+    String path = "src/available_cash.csv";
 
     public WithdrawOperation() {}
 
@@ -74,6 +79,9 @@ public class WithdrawOperation {
                 && checkValidAmount(toInt(customAmount))) {
             successWithdrawMsg();
             account.setBalance(account.getBalance() - toInt(customAmount));
+            availableCash -= toInt(customAmount);
+            //readAtmFile("src/available_cash.csv");
+            writeAtmFile(path, readAtmFile(path));
             return true;
         }
         return false;
@@ -93,7 +101,7 @@ public class WithdrawOperation {
     }
 
     private boolean checkAtmHasMoney(int amount) {
-        if (AVAILABLE_CASH < amount) {
+        if (availableCash < amount) {
             notEnoughAtmCashMsg();
             return false;
         }

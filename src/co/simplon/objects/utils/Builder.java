@@ -4,6 +4,7 @@ import co.simplon.objects.entities.Account;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static co.simplon.objects.utils.Converter.toBool;
 import static co.simplon.objects.utils.Converter.toInt;
@@ -26,6 +27,13 @@ public class Builder {
                         accounts.add(account);
         });
         return accounts;
+    }
+
+    public static String buildAtmCash(List<String> cashInfos){
+        return cashInfos.stream()
+                .skip(1)
+                .toList()
+                .get(0);
     }
 
 }

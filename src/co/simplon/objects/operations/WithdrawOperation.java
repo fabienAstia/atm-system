@@ -27,7 +27,7 @@ public class WithdrawOperation {
             if (!verified) {
                 pincodeMessage();
                 String input = read();
-                if (card.verifyPinCode(input, account)) {
+                if (card.verifyPinCode(input)) {
                     if(!account.isActivated()){
                         bank.activateAccount(account);
                         Printer.unlockCardMsg();

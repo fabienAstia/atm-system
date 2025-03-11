@@ -18,7 +18,7 @@ public class Card {
         this.unlocked = account.isActivated();
     }
 
-    public boolean verifyPinCode(String input, Account account){
+    public boolean verifyPinCode(String input){
         if(hash(input).equals(this.getHashPinCode())){
             if(!activated) {
                 unlockCard();

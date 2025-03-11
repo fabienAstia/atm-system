@@ -16,18 +16,6 @@ public class Account {
         this.isActivated = isActivated;
     }
 
-    public int getAccountId() {
-        return accountId;
-    }
-
-    public Boolean getActivated() {
-        return isActivated;
-    }
-
-    public void setActivated(Boolean activated) {
-        isActivated = activated;
-    }
-
     public String getPincode() {
         return pincode;
     }

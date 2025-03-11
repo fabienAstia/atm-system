@@ -67,9 +67,9 @@ public class Card {
     @Override
     public String toString() {
         return "Card{" +
-                "hashPinCode= [PROTECTED]" +
-                ", unlocked= [PROTECTED]" +
-                ", userinfo= [PROTECTED]" +
+                "bban=[PROTECTED]" +
+                ", hashPinCode=[PROTECTED]" +
+                ", unlocked=" + unlocked +
                 '}';
     }
 }

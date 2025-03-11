@@ -4,21 +4,19 @@ import co.simplon.objects.operations.*;
 
 import java.util.List;
 
-import static co.simplon.objects.utils.Builder.buildUserAccounts;
-import static co.simplon.objects.utils.Parser.readFile;
 import static co.simplon.objects.utils.Printer.*;
 import static co.simplon.objects.utils.Reader.*;
 
 public class AtmService {
 
-    public static final String PATH = "src/bank_accounts.csv";
     public static boolean verified = false;
     public static Integer count = 0;
 
     public AtmService() {}
 
     public void doOperations() {
-        List<UserAccount> accounts = buildUserAccounts(readFile(PATH));
+        Bank bank = new Bank();
+        List<UserAccount> accounts = bank.getAccounts();
         UserAccount userAccount = accounts.get(1);
         Card card = new Card(userAccount);
 

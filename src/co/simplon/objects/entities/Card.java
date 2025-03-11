@@ -10,10 +10,12 @@ import static co.simplon.objects.utils.Builder.activated;
 
 public class Card {
 
+    private final String bban;
     private final String hashPinCode;
     private boolean unlocked;
 
     public Card(UserAccount userAccount) {
+        this.bban = userAccount.getBban();
         this.hashPinCode = hash(userAccount.getPincode());
         this.unlocked = userAccount.isActivated();
     }

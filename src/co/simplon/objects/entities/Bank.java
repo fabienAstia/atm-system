@@ -11,21 +11,28 @@ public class Bank {
     private static final String PATH = "src/bank_accounts.csv";
     private List<UserAccount> accounts = buildUserAccounts(readFile(PATH));
 
-    public Bank() {
-    }
+    public Bank() {}
 
     public static void updateBankAccount(UserAccount userAccount) {
         List<List<String>> oldContent = readFile(PATH);
-        List<String> matchingAccount = getAccountByPincode(userAccount, oldContent);
-        matchingAccount.set(1, userAccount.getBalance().toString());
-        matchingAccount.set(3, userAccount.isActivated().toString());
+        List<String> matchingAccount = getAccountByBban(userAccount, oldContent);
+        matchingAccount.set(2, userAccount.getBalance().toString());
+        matchingAccount.set(4, userAccount.isActivated().toString());
         write(PATH, oldContent);
     }
 
-    private static List<String> getAccountByPincode(UserAccount userAccount, List<List<String>> oldContent) {
+    private static List<String> getAccountByBban(UserAccount userAccount, List<List<String>> oldContent) {
         return oldContent.stream()
-                .filter(row -> String.valueOf(row.get(2)).equals(userAccount.getPincode()))
+                .filter(row -> String.valueOf(row.get(1)).equals(userAccount.getBban()))
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException("Aucun compte trouvé avec ce PIN."));
+    }
+
+    public List<UserAccount> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<UserAccount> accounts) {
+        this.accounts = accounts;
     }
 }

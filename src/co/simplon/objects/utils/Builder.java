@@ -19,9 +19,10 @@ public class Builder {
                 .forEach(record -> {
                         UserAccount userAccount = new UserAccount(
                                 toInt(record.get(0)),
-                                toInt(record.get(1)),
-                                record.get(2),
-                                activated = toBool(record.get(3)));
+                                record.get(1),
+                                toInt(record.get(2)),
+                                record.get(3),
+                                activated = toBool(record.get(4)));
                         accounts.add(userAccount);
         });
         return accounts;

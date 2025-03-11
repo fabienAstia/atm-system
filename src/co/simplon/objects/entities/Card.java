@@ -1,7 +1,5 @@
 package co.simplon.objects.entities;
 
-import co.simplon.objects.utils.Printer;
-
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -23,14 +21,14 @@ public class Card {
     public boolean verifyPinCode(String input, Account account){
         if(hash(input).equals(this.getHashPinCode())){
             if(!activated) {
-                unlockCard(account);
+                unlockCard();
             }
             return true;
         }
         return false;
     }
 
-    private void unlockCard(Account account) {
+    private void unlockCard() {
         this.unlocked = true;
     }
 

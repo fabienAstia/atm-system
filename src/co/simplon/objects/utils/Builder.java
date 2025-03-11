@@ -5,6 +5,9 @@ import co.simplon.objects.entities.UserAccount;
 import java.util.ArrayList;
 import java.util.List;
 
+import static co.simplon.objects.utils.Converter.toBool;
+import static co.simplon.objects.utils.Converter.toInt;
+
 public class Builder {
 
     public static Boolean activated;
@@ -15,10 +18,10 @@ public class Builder {
                 .skip(1)
                 .forEach(record -> {
                         UserAccount userAccount = new UserAccount(
-                                Integer.parseInt(record.get(0)),
-                                Integer.parseInt(record.get(1)),
+                                toInt(record.get(0)),
+                                toInt(record.get(1)),
                                 record.get(2),
-                                activated = Boolean.parseBoolean(record.get(3)));
+                                activated = toBool(record.get(3)));
                         accounts.add(userAccount);
         });
         return accounts;

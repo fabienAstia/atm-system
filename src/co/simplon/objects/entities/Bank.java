@@ -21,8 +21,8 @@ public class Bank {
         writeBankFile(bankPathFile, oldContent);
     }
 
-    private static List<String> getAccountByBban(Account account, List<List<String>> oldContent) {
-        return oldContent.stream()
+    private static List<String> getAccountByBban(Account account, List<List<String>> bankAccountFileContent) {
+        return bankAccountFileContent.stream()
                 .filter(row -> String.valueOf(row.get(1)).equals(account.getBban()))
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException("Aucun compte trouvé avec ce PIN."));

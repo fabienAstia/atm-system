@@ -44,7 +44,7 @@ public class WithdrawOperation {
                 count++;
                 if (count == 3) {
                     pincodeMessage();
-                    card.lockCard(account);
+                    card.lockCard();
                 }
             } else {
                 operation(account);

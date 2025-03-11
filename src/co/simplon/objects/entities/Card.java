@@ -32,9 +32,8 @@ public class Card {
         this.unlocked = true;
     }
 
-    public void lockCard(Account account) {
+    public void lockCard() {
         this.unlocked = false;
-        account.setIsActivated(false);
     }
 
     public String hash(String pinCode) {

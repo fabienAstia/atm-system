@@ -14,31 +14,31 @@ public class Card {
     private final String hashPinCode;
     private boolean unlocked;
 
-    public Card(UserAccount userAccount) {
-        this.bban = userAccount.getBban();
-        this.hashPinCode = hash(userAccount.getPincode());
-        this.unlocked = userAccount.isActivated();
+    public Card(Account account) {
+        this.bban = account.getBban();
+        this.hashPinCode = hash(account.getPincode());
+        this.unlocked = account.isActivated();
     }
 
-    public boolean verifyPinCode(String input, UserAccount userAccount){
+    public boolean verifyPinCode(String input, Account account){
         if(hash(input).equals(this.getHashPinCode())){
             if(!activated) {
-                unlockCard(userAccount);
+                unlockCard(account);
             }
             return true;
         }
         return false;
     }
 
-    private void unlockCard(UserAccount userAccount) {
+    private void unlockCard(Account account) {
         this.unlocked = true;
-        userAccount.setIsActivated(true);
+        account.setIsActivated(true);
         Printer.unlockCardMsg();
     }
 
-    public void lockCard(UserAccount userAccount) {
+    public void lockCard(Account account) {
         this.unlocked = false;
-        userAccount.setIsActivated(false);
+        account.setIsActivated(false);
     }
 
     public String hash(String pinCode) {

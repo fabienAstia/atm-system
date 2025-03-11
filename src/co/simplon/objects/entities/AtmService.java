@@ -16,9 +16,9 @@ public class AtmService {
 
     public void doOperations() {
         Bank bank = new Bank();
-        List<UserAccount> accounts = bank.getAccounts();
-        UserAccount userAccount = accounts.get(1);
-        Card card = new Card(userAccount);
+        List<Account> accounts = bank.getAccounts();
+        Account account = accounts.get(1);
+        Card card = new Card(account);
 
         String input;
         do{
@@ -29,24 +29,24 @@ public class AtmService {
         do {
             choice = chooseOperation();
             if (choice.equals("1")) {
-                getBalance(userAccount, card);
+                getBalance(account, card);
             }
             if (choice.equals("2")) {
-                withdraw(userAccount, card);
+                withdraw(account, card);
             }
         } while (!choice.equals("X"));
         quitMsg();
-        Bank.updateBankAccount(userAccount);
+        Bank.updateBankAccount(account);
     }
 
-    private static void withdraw(UserAccount userAccount, Card card) {
+    private static void withdraw(Account account, Card card) {
         WithdrawOperation withdrawOperation = new WithdrawOperation();
-        withdrawOperation.doWithdraw(userAccount, card);
+        withdrawOperation.doWithdraw(account, card);
     }
 
-    private static void getBalance(UserAccount userAccount, Card card) {
+    private static void getBalance(Account account, Card card) {
         BalanceOperation balanceOperation = new BalanceOperation();
-        balanceOperation.getBalance(userAccount, card);
+        balanceOperation.getBalance(account, card);
     }
 
     public static String chooseOperation(){

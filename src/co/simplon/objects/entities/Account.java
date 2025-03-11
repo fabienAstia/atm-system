@@ -1,14 +1,14 @@
 
 package co.simplon.objects.entities;
 
-public class UserAccount {
+public class Account {
     private final Integer accountId;
     private final String bban;
     private final String pincode;
     private Integer balance;
     private Boolean isActivated;
 
-    public UserAccount(int accountId, String bban, Integer balance, String pincode, Boolean isActivated) {
+    public Account(int accountId, String bban, Integer balance, String pincode, Boolean isActivated) {
         this.accountId = accountId;
         this.bban = bban;
         this.balance = balance;
@@ -54,7 +54,7 @@ public class UserAccount {
 
     @Override
     public String toString() {
-        return "UserAccount{" +
+        return "Account{" +
                 "accountId=" + accountId +
                 ", bban='" + bban +
                 ", pincode=[PROTECTED]" +

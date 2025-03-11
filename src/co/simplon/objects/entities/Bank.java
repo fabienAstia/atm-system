@@ -9,7 +9,7 @@ import static co.simplon.objects.utils.Writer.writeBankFile;
 public class Bank {
 
     private static final String PATH = "src/bank_accounts.csv";
-    private List<Account> accounts = buildUserAccounts(readBankFile(PATH));
+    private final List<Account> accounts = buildUserAccounts(readBankFile(PATH));
 
     public Bank() {}
 

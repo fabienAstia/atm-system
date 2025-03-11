@@ -16,12 +16,16 @@ public class Bank {
 
     public static void updateBankAccount(UserAccount userAccount) {
         List<List<String>> oldContent = readFile(PATH);
-        List<String> matchingAccount = oldContent.stream()
-                .filter(row -> String.valueOf(row.get(2)).equals(userAccount.getPincode()))
-                .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("Aucun compte trouvé avec ce PIN."));
+        List<String> matchingAccount = getAccountByPincode(userAccount, oldContent);
         matchingAccount.set(1, userAccount.getBalance().toString());
         matchingAccount.set(3, userAccount.isActivated().toString());
         write(PATH, oldContent);
+    }
+
+    private static List<String> getAccountByPincode(UserAccount userAccount, List<List<String>> oldContent) {
+        return oldContent.stream()
+                .filter(row -> String.valueOf(row.get(2)).equals(userAccount.getPincode()))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("Aucun compte trouvé avec ce PIN."));
     }
 }

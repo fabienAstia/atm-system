@@ -4,21 +4,21 @@ import java.util.List;
 
 import static co.simplon.objects.utils.Builder.buildUserAccounts;
 import static co.simplon.objects.utils.Parser.readBankFile;
+import static co.simplon.objects.utils.PathProvider.bankPathFile;
 import static co.simplon.objects.utils.Writer.writeBankFile;
 
 public class Bank {
 
-    private static final String PATH = "src/bank_accounts.csv";
-    private final List<Account> accounts = buildUserAccounts(readBankFile(PATH));
+    private final List<Account> accounts = buildUserAccounts(readBankFile(bankPathFile));
 
     public Bank() {}
 
     public static void updateBankAccount(Account account) {
-        List<List<String>> oldContent = readBankFile(PATH);
+        List<List<String>> oldContent = readBankFile(bankPathFile);
         List<String> matchingAccount = getAccountByBban(account, oldContent);
         matchingAccount.set(2, account.getBalance().toString());
         matchingAccount.set(4, account.isActivated().toString());
-        writeBankFile(PATH, oldContent);
+        writeBankFile(bankPathFile, oldContent);
     }
 
     private static List<String> getAccountByBban(Account account, List<List<String>> oldContent) {

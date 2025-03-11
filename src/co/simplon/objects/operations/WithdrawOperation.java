@@ -13,6 +13,7 @@ import static co.simplon.objects.entities.AtmService.verified;
 import static co.simplon.objects.entities.Bank.checkAccountHasMoney;
 import static co.simplon.objects.utils.Builder.buildAtmCash;
 import static co.simplon.objects.utils.Parser.readAtmFile;
+import static co.simplon.objects.utils.PathProvider.atmPathFile;
 import static co.simplon.objects.utils.Printer.*;
 import static co.simplon.objects.utils.Converter.onlyDigits;
 import static co.simplon.objects.utils.Converter.toInt;
@@ -21,8 +22,7 @@ import static co.simplon.objects.utils.Writer.writeAtmFile;
 
 public class WithdrawOperation {
 
-    public static Integer availableCash = toInt(buildAtmCash(readAtmFile("src/available_cash.csv")));
-    String path = "src/available_cash.csv";
+    public static Integer availableCash = toInt(buildAtmCash(readAtmFile(atmPathFile)));
 
     public WithdrawOperation() {}
 
@@ -79,7 +79,7 @@ public class WithdrawOperation {
             successWithdrawMsg();
             account.setBalance(account.getBalance() - toInt(customAmount));
             availableCash -= toInt(customAmount);
-            writeAtmFile(path, readAtmFile(path));
+            writeAtmFile(atmPathFile, readAtmFile(atmPathFile));
             return true;
         }
         return false;

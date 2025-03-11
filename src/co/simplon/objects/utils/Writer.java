@@ -11,12 +11,11 @@ public final class Writer {
 
     public static void write(String filePath, List<List<String>> contentToUpdate){
         try (FileWriter writer = new FileWriter(filePath)) {
-            //List<List<String>> newContent = new ArrayList<>();
             StringBuilder newContent = new StringBuilder();
             contentToUpdate.forEach(account -> {
-                List<String> row = new ArrayList<>();
-                account.forEach(value -> newContent.append(value).append(";"));
-                newContent.append(row).append("\r");
+                List<String> row = new ArrayList<>(account);
+                newContent.append(String.join(";", row))
+                        .append(System.lineSeparator());
             });
              writer.write(newContent.toString());
         } catch (IOException e) {

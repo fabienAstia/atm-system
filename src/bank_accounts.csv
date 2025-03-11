@@ -1,1 +1,4 @@
-account_id;balance;card_pincode;activated;[]1;500;1111;false;[]2;1000;1234;false;[]3;1500;5678;false;[]
+account_id;balance;card_pincode;activated
+1;500;1111;false
+2;970;1234;true
+3;1500;5678;false

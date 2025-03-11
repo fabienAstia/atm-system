@@ -32,8 +32,6 @@ public class Card {
 
     private void unlockCard(Account account) {
         this.unlocked = true;
-        account.setIsActivated(true);
-        Printer.unlockCardMsg();
     }
 
     public void lockCard(Account account) {

@@ -28,6 +28,10 @@ public class Bank {
                 .orElseThrow(() -> new IllegalArgumentException("Aucun compte trouvé avec ce PIN."));
     }
 
+    public void activateAccount(Account account){
+        account.setIsActivated(true);
+    }
+
     public static boolean checkAccountHasMoney(Account account, int amount) {
         return account.getBalance() >= amount;
     }

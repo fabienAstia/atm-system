@@ -1,4 +1,4 @@
-package co.simplon.objects.operations;
+package co.simplon.objects.entities;
 
 import co.simplon.objects.utils.Printer;
 

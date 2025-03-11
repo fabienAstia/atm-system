@@ -1,7 +1,10 @@
 package co.simplon.objects.operations;
 
 import co.simplon.objects.entities.Account;
+import co.simplon.objects.entities.Bank;
 import co.simplon.objects.entities.Card;
+import co.simplon.objects.entities.FixedAmount;
+import co.simplon.objects.utils.Printer;
 
 import java.util.Objects;
 
@@ -19,12 +22,16 @@ public class WithdrawOperation {
 
     public WithdrawOperation() {}
 
-    public void doWithdraw(Account account, Card card) {
+    public void doWithdraw(Account account, Card card, Bank bank) {
         while (count < 3) {
             if (!verified) {
                 pincodeMessage();
                 String input = read();
                 if (card.verifyPinCode(input, account)) {
+                    if(!account.isActivated()){
+                        bank.activateAccount(account);
+                        Printer.unlockCardMsg();
+                    }
                     verified = true;
                     count = 0;
                     operation(account);
@@ -80,7 +87,7 @@ public class WithdrawOperation {
         return true;
     }
 
-    public String chooseAmount() {
+    private String chooseAmount() {
         displayAmounts();
         return read();
     }

@@ -29,24 +29,24 @@ public class AtmService {
         do {
             choice = chooseOperation();
             if (choice.equals("1")) {
-                getBalance(account, card);
+                getBalance(account, card, bank);
             }
             if (choice.equals("2")) {
-                withdraw(account, card);
+                withdraw(account, card, bank);
             }
         } while (!choice.equals("X"));
         quitMsg();
         Bank.updateBankAccount(account);
     }
 
-    private static void withdraw(Account account, Card card) {
+    private void withdraw(Account account, Card card, Bank bank) {
         WithdrawOperation withdrawOperation = new WithdrawOperation();
-        withdrawOperation.doWithdraw(account, card);
+        withdrawOperation.doWithdraw(account, card, bank);
     }
 
-    private static void getBalance(Account account, Card card) {
+    private void getBalance(Account account, Card card, Bank bank) {
         BalanceOperation balanceOperation = new BalanceOperation();
-        balanceOperation.getBalance(account, card);
+        balanceOperation.getBalance(account, card, bank);
     }
 
     public static String chooseOperation(){

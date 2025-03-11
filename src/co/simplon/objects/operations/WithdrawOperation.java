@@ -21,7 +21,6 @@ import static co.simplon.objects.utils.Writer.writeAtmFile;
 
 public class WithdrawOperation {
 
-    //private static final int AVAILABLE_CASH = 10000;*
     public static Integer availableCash = toInt(buildAtmCash(readAtmFile("src/available_cash.csv")));
     String path = "src/available_cash.csv";
 
@@ -80,7 +79,6 @@ public class WithdrawOperation {
             successWithdrawMsg();
             account.setBalance(account.getBalance() - toInt(customAmount));
             availableCash -= toInt(customAmount);
-            //readAtmFile("src/available_cash.csv");
             writeAtmFile(path, readAtmFile(path));
             return true;
         }
